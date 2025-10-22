@@ -115,4 +115,22 @@ annotate service.Weapons with @(
 
 );
 
-
+annotate service.Weapons with {
+    Name @Common: {ValueList: {
+        Label         : 'Gun Name',
+        $Type         : 'Common.ValueListType',
+        CollectionPath: 'Weapons',
+        Parameters    : [
+            {
+                $Type            : 'Common.ValueListParameterInOut',
+                LocalDataProperty: Name,
+                ValueListProperty: 'Name'
+            },
+            {
+                $Type            : 'Common.ValueListParameterInOut',
+                LocalDataProperty: Type,
+                ValueListProperty: 'Type'
+            }
+        ]
+    }, }
+};
