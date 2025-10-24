@@ -7,7 +7,7 @@ entity WEAPON {
         Model        : String;
         Type         : String;
         Caliber      : String;
-        Range        : String;
+        Range        : Integer;
         Accuracy     : String;
         BaseDamage   : String;
         APDamage     : String;

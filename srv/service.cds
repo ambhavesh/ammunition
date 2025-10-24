@@ -1,10 +1,34 @@
 namespace ammunation.srv.service;
 
 using {ammunation.db.schema as db} from '../db/schema';
-using {ammunation.db.view as view} from '../db/view';
 
 
 service AMMUNATION_SRV @(path: '/srv-api') {
     entity Weapons as projection on db.WEAPON;
-    entity GunF4   as projection on view.GunF4;
+
+    @cds.persistence.skip
+    entity GunVH   as
+        projection on db.WEAPON {
+            key Name as Name,
+                Type as Type
+        };
+    
+    annotate service.AMMUNATION_SRV.Weapons with {
+        Name @Common: {ValueList: {
+            $Type         : 'Common.ValueListType',
+            CollectionPath: 'GunVH',
+            Parameters    : [
+                {
+                    $Type            : 'Common.ValueListParameterInOut',
+                    LocalDataProperty: Name,
+                    ValueListProperty: 'Name'
+                },
+                {
+                    $Type            : 'Common.ValueListParameterInOut',
+                    ValueListProperty: 'Type'
+                }
+            ]
+        }, }
+    };
+
 }
