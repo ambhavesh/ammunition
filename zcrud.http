@@ -15,6 +15,25 @@ Content-Type: application/json
     "Accuracy": "Medium-High",
     "BaseDamage": "95",
     "APDamage": "80",
-    "Cost": "140000",
+    "Cost": "150000",
+    "Weight": "7.5 kg"
+  }
+
+###
+
+PUT http://localhost:4004/odata/v2/srv-api/Weapons('135f457a-a7f9-4def-a6c5-09e7a2e166a5')
+Content-Type: application/json
+
+{
+    "Name": "PKM",
+    "Manufacturer": "Kalashnikov Concern",
+    "Model": "PKM",
+    "Type": "Machine Gun",
+    "Caliber": "7.62x54mmR",
+    "Range": 1100,
+    "Accuracy": "High",
+    "BaseDamage": "95",
+    "APDamage": "80",
+    "Cost": "150000",
     "Weight": "7.5 kg"
   }

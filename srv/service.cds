@@ -1,18 +1,14 @@
 namespace ammunation.srv.service;
 
 using {ammunation.db.schema as db} from '../db/schema';
+using {ammunation.db.view as view} from '../db/view';
 
 
 service AMMUNATION_SRV @(path: '/srv-api') {
-    entity Weapons as projection on db.WEAPON;
+    entity Weapons    as projection on db.WEAPON;
+    entity GunVH      as projection on view.GunVH;
+    entity AccuracyVH as projection on view.AccuracyVH;
 
-    @cds.persistence.skip
-    entity GunVH   as
-        projection on db.WEAPON {
-            key Name as Name,
-                Type as Type
-        };
-    
     annotate service.AMMUNATION_SRV.Weapons with {
         Name @Common: {ValueList: {
             $Type         : 'Common.ValueListType',
@@ -29,6 +25,25 @@ service AMMUNATION_SRV @(path: '/srv-api') {
                 }
             ]
         }, }
+    };
+
+
+    annotate service.AMMUNATION_SRV.Weapons with {
+        Accuracy @Common: {
+            Label                   : 'Accuracy',
+            Text                    : Accuracy,
+            TextArrangement         : #TextOnly,
+            ValueListWithFixedValues: true,
+            ValueList               : {
+                $Type         : 'Common.ValueListType',
+                CollectionPath: 'AccuracyVH',
+                Parameters    : [{
+                    $Type            : 'Common.ValueListParameterInOut',
+                    LocalDataProperty: Accuracy,
+                    ValueListProperty: 'Accuracy'
+                }]
+            },
+        }
     };
 
 }
